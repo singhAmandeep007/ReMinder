@@ -19,7 +19,7 @@ describe("Home Page", () => {
 
     homeElements.root.findByRole("heading", { name: "Folder Structure", level: 2 }).should("exist");
 
-    homeElements.footer.contains("Copyright © 2024Amandeep Singh").should("exist");
+    homeElements.footer.contains(`Copyright © ${new Date().getFullYear()}Amandeep Singh`).should("exist");
 
     homeElements.footer
       .findByRole("link", { name: "Amandeep Singh" })

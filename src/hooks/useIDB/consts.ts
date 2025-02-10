@@ -1,1 +1,1 @@
-export const IDB_KEY = "__reminder-app-IDB__";
+export const IDB_KEY = "__ReMinder-IDB__";

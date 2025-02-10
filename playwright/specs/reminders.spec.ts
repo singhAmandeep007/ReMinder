@@ -9,7 +9,7 @@ test.describe("Reminders Page", () => {
     const remindersElements = new RemindersElements(page);
     await remindersElements.goto();
 
-    await expect(remindersElements.page).toHaveTitle(/Reminder App/);
+    await expect(remindersElements.page).toHaveTitle(/ReMinder/);
   });
 
   test("should render reminders page and able to create reminder group", async ({ page, mocker }) => {

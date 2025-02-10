@@ -1,5 +1,5 @@
 {
-  "name": "reminder-app",
+  "name": "reminder",
   "version": "0.1.0",
   "homepage": ".",
   "private": true,
@@ -80,7 +80,7 @@
     "DEPLOY": "------------------------------------------------------------------------",
     "deploy": "run-s deploy:build deploy:gh-pages",
     "deploy:build": "env-cmd -f ./.production.env npm run build",
-    "deploy:gh-pages": "gh-pages -d build -- --message \"Updates\"",
+    "deploy:gh-pages": "gh-pages -d build -- --message \"🚀 Shipping\"",
     "STORYBOOK": "------------------------------------------------------------------------",
     "storybook:start": "storybook dev -p 6006",
     "storybook:build": "storybook build",

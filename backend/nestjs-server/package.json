@@ -1,7 +1,7 @@
 {
-  "name": "reminder-app-nestjs-server",
+  "name": "reminder-nestjs-server",
   "version": "0.0.1",
-  "description": "Server build using nestjs for reminder app",
+  "description": "Server build using nestjs for ReMinder",
   "author": {
     "email": "amandeep.singh.fsd@gmail.com",
     "name": "Amandeep Singh"

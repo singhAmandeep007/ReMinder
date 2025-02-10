@@ -7,7 +7,7 @@ test.describe("Home Page", () => {
     const homeElements = new HomeElements(page);
     await homeElements.goto();
 
-    await expect(homeElements.page).toHaveTitle(/Reminder App/);
+    await expect(homeElements.page).toHaveTitle(/ReMinder/);
   });
 
   test("should render home page content and navigate to reminders page", async ({ page }) => {
@@ -21,7 +21,7 @@ test.describe("Home Page", () => {
 
     await expect(homeElements.root.getByRole("heading", { name: "Folder Structure", level: 2 })).toBeVisible();
 
-    await expect(homeElements.footer).toContainText("Copyright © 2024Amandeep Singh");
+    await expect(homeElements.footer).toContainText(`Copyright © ${new Date().getFullYear()}Amandeep Singh`);
 
     await expect(homeElements.footer.getByRole("link", { name: "Amandeep Singh" })).toHaveAttribute(
       "href",
