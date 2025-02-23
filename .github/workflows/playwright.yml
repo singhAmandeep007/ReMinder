@@ -27,15 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies (if cache hit)
-        if: steps.cache-dependencies.outputs.cache-hit == 'true'
+      - name: Install dependencies
         run: npm ci
-
-      - name: Install dependencies and verify Playwright (if cache miss)
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          npm ci
-          npx playwright --version
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
