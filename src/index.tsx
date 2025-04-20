@@ -31,7 +31,7 @@ async function setupApp() {
   }
 
   // NOTE: extra configuration to support mirage in cypress
-  if (getEnvValue("REACT_APP_MOCKER") === MOCKER_TYPE.mirage) {
+  if (getEnvValue("REACT_APP_MOCKER") === MOCKER_TYPE.mirage && !!window.Cypress) {
     await import("services/mocker/mirage/proxyServer").then(({ startProxyMirageServer }) => {
       startProxyMirageServer();
     });

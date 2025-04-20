@@ -73,6 +73,16 @@ export const setupReminderGroupsController: TSetupController = ({ db }) => {
       return HttpResponse.json({ message: `Reminder Group with id ${params.id} not found!` }, { status: 404 });
     }
 
+    db.reminder.deleteMany({
+      where: {
+        group: {
+          id: {
+            equals: params.id,
+          },
+        },
+      },
+    });
+
     db.reminderGroup.delete({
       where: {
         id: {
