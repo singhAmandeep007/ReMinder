@@ -1,0 +1,35 @@
+@host = localhost:8080
+
+### Create Reminder
+POST http://{{host}}/api/reminders HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5ODQ1ODcsInVzZXJfaWQiOiIxYWQxY2FkOC1hMmFkLTRjNTctOWQ5Mi0wMGVlMDU3ZWVjZmQifQ.EvpDAxpWfho3YU2_H_AU-SaBrZg-DGgKLXWXvS2wcWE
+
+{
+	"title": "Title1",
+	"description": "some description"
+}
+
+### Get Reminders
+GET http://{{host}}/api/reminders HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5ODQ1ODcsInVzZXJfaWQiOiIxYWQxY2FkOC1hMmFkLTRjNTctOWQ5Mi0wMGVlMDU3ZWVjZmQifQ.EvpDAxpWfho3YU2_H_AU-SaBrZg-DGgKLXWXvS2wcWE
+
+### Get Reminder by ID
+GET http://{{host}}/api/reminders/09f2c8dd-f014-46d4-a819-b2d652f4779f HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5ODQ1ODcsInVzZXJfaWQiOiIxYWQxY2FkOC1hMmFkLTRjNTctOWQ5Mi0wMGVlMDU3ZWVjZmQifQ.EvpDAxpWfho3YU2_H_AU-SaBrZg-DGgKLXWXvS2wcWE
+
+
+### Update Reminder by ID
+PUT http://{{host}}/api/reminders/09f2c8dd-f014-46d4-a819-b2d652f4778f HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5ODQ1ODcsInVzZXJfaWQiOiIxYWQxY2FkOC1hMmFkLTRjNTctOWQ5Mi0wMGVlMDU3ZWVjZmQifQ.EvpDAxpWfho3YU2_H_AU-SaBrZg-DGgKLXWXvS2wcWE
+
+{
+  "title": "New Title"
+}
+
+
+### Delete Reminder by ID
+DELETE http://{{host}}/api/reminders/09f2c8dd-f014-46d4-a819-b2d652f4778f HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk5ODQ1ODcsInVzZXJfaWQiOiIxYWQxY2FkOC1hMmFkLTRjNTctOWQ5Mi0wMGVlMDU3ZWVjZmQifQ.EvpDAxpWfho3YU2_H_AU-SaBrZg-DGgKLXWXvS2wcWE

@@ -1,0 +1,32 @@
+@host = localhost:8080
+
+### Register
+POST http://{{host}}/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "test13@example.com",
+	"password": "test12"
+}
+
+### Login
+POST http://{{host}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+	"email": "test13@example.com",
+	"password": "test12"
+}
+
+
+### Refresh
+POST http://{{host}}/api/auth/refresh HTTP/1.1
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZjM5MmFkYy0zZjk5LTRlYWQtOWI4NC0zZDdkZjM5M2FjZTUiLCJleHAiOjE3NDU3NzkzNzQsIm5iZiI6MTc0NTE3NDU3NCwiaWF0IjoxNzQ1MTc0NTc0LCJ0eXBlIjoicmVmcmVzaCIsImVudGl0eUlkICI6IjZmMzkyYWRjLTNmOTktNGVhZC05Yjg0LTNkN2RmMzkzYWNlNSIsImN1c3RvbSI6eyJlbWFpbCI6InRlc3QxM0BleGFtcGxlLmNvbSIsInJvbGUiOiJ1c2VyIiwidXNlcm5hbWUiOiJoYXBwaWx5LW1hc3NpdmUtbGlvbi0xNzQ1MTc0MzI4In0sImp0aSI6IjA3Y2JmMTQ0LWJkMmYtNDFiYi1hMjUyLTAzZmE3OTczMzExNCJ9.RRSVzQBLMaiTNvvoIzJi5FZ4SSvu1HH_UBkQ8Ft1WO8"
+}
+
+### Get Me
+GET http://{{host}}/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZjM5MmFkYy0zZjk5LTRlYWQtOWI4NC0zZDdkZjM5M2FjZTUiLCJleHAiOjE3NDUxNzU3MDksIm5iZiI6MTc0NTE3NDgwOSwiaWF0IjoxNzQ1MTc0ODA5LCJ0eXBlIjoiYWNjZXNzIiwiZW50aXR5SWQgIjoiNmYzOTJhZGMtM2Y5OS00ZWFkLTliODQtM2Q3ZGYzOTNhY2U1IiwiY3VzdG9tIjp7ImVtYWlsIjoidGVzdDEzQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJ1c2VybmFtZSI6ImhhcHBpbHktbWFzc2l2ZS1saW9uLTE3NDUxNzQzMjgifSwianRpIjoiZWUwYjNiZjAtODIzNy00MzcyLTlkOGItM2U4OWJjYThkMDk5In0.YvbDEZx6YQkzVi3SpZkbZ5JCciZy_CeNA0DY3042uQY

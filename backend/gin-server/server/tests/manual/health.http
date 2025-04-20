@@ -1,0 +1,4 @@
+@host = localhost:8080
+
+### Health Check
+GET http://{{host}}/health HTTP/1.1

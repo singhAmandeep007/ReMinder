@@ -1,0 +1,12 @@
+go 1.22.1
+
+
+use (
+	./pkg/config
+	./pkg/constants
+	./pkg/logger
+	./pkg/usernamegen
+  ./pkg/auth
+  ./pkg/memcache
+	./server
+)
