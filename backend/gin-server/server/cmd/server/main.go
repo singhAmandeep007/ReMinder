@@ -39,7 +39,7 @@ func main() {
 
 	// Start the server
 	if err := application.Run(); err != nil {
-		log.Fatalf("Server terminated with error", err)
+		log.Fatalf("Server terminated with error: %v", err)
 		os.Exit(1)
 	}
 }

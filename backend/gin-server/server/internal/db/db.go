@@ -83,6 +83,8 @@ func NewDBManager(cfg *config.Config, logger *logger.Logger) (*DBManager, error)
 	switch cfg.DBType {
 	case constants.SQLite:
 		db, err = NewSQLiteDatabase(cfg, logger)
+	case constants.Firestore:
+		db, err = NewFirestoreDatabase(cfg, logger)
 	default:
 		return nil, fmt.Errorf("unsupported database type: %s", cfg.DBType)
 	}

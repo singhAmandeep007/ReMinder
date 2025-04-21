@@ -19,8 +19,15 @@ type Config struct {
 
 	SQLiteFile string
 
+	FirebaseProjectID            string
+	UseFirebaseEmulator          bool
+	FirebaseEmulatorHost         string
+	FirebaseGoogleAppCredentials string
+
 	MongoDBURI  string
 	MongoDBName string
+
+	EnableDBSeeding bool
 
 	JWTSecret string
 }
@@ -34,13 +41,23 @@ func Load(fileName string) (*Config, error) {
 	}
 
 	config := &Config{
-		AppEnv:      getEnv("APP_ENV", constants.EnvDevelopment),
-		Port:        getEnvAsInt("PORT", 8080),
-		DBType:      getEnv("DB_TYPE", constants.SQLite),
-		SQLiteFile:  getEnv("SQLITE_FILE", "./gin-server.db"),
+		AppEnv: getEnv("APP_ENV", constants.EnvDevelopment),
+		Port:   getEnvAsInt("PORT", 8080),
+		DBType: getEnv("DB_TYPE", constants.SQLite),
+
+		SQLiteFile: getEnv("SQLITE_FILE", "./gin-server.db"),
+
+		FirebaseProjectID:            getEnv("FIREBASE_PROJECT_ID", ""),
+		UseFirebaseEmulator:          getEnvAsInt("USE_FIREBASE_EMULATOR", 0) == 1,
+		FirebaseEmulatorHost:         getEnv("FIREBASE_EMULATOR_HOST", "localhost:8081"),
+		FirebaseGoogleAppCredentials: getEnv("FIREBASE_GOOGLE_APP_CREDENTIALS", ""),
+
 		MongoDBURI:  getEnv("MONGO_DB_URI", "mongodb://localhost:27017"),
 		MongoDBName: getEnv("MONGO_DB_NAME", "api-server"),
-		JWTSecret:   getEnv("JWT_SECRET", constants.DefaultJWTSecret),
+
+		EnableDBSeeding: getEnvAsInt("ENABLE_DB_SEEDING", 0) == 1,
+
+		JWTSecret: getEnv("JWT_SECRET", constants.DefaultJWTSecret),
 	}
 
 	// Validate configuration

@@ -74,7 +74,7 @@ func (a *App) Run() error {
 
 	// Start the server
 	go func() {
-		a.log.Infof("Starting server", "port", a.cfg.Port)
+		a.log.Infof("Starting server at port %d", a.cfg.Port)
 		serverErrors <- a.httpServer.ListenAndServe()
 	}()
 	// Channel to listen for an interrupt or terminate signal from the OS
@@ -95,7 +95,7 @@ func (a *App) Run() error {
 		// Gracefully shutdown the server by waiting on existing requests
 		if err := a.httpServer.Shutdown(ctx); err != nil {
 			// If shutdown timed out, force close
-			a.log.Errorf("Graceful shutdown timed out", "error", err)
+			a.log.Errorf("Graceful shutdown timed out error %s", err)
 			a.httpServer.Close()
 			return err
 		}

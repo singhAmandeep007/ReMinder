@@ -59,6 +59,7 @@ func (s *authService) Register(ctx context.Context, email, password string) (*do
 		Password: hashedPassword,
 		Username: usernamegen.Generate(),
 		ID:       uuid.New().String(),
+		Role:     domain.UserRoleUser,
 	})
 	if err != nil {
 		return nil, err
@@ -68,7 +69,6 @@ func (s *authService) Register(ctx context.Context, email, password string) (*do
 	if err != nil {
 		return nil, err
 	}
-
 	return user, nil
 }
 
