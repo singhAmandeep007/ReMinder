@@ -1,46 +1,91 @@
-# Getting Started with Create React App
+# ReMinder - A Production Grade Reminder App 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fully-featured reminder application showcasing modern web development practices, backend integration, and testing methodologies. This project is designed to be a reference for building scalable and maintainable applications using React, TypeScript, NestJS, Golang, CI/CD implementation and various testing frameworks.
 
-## Available Scripts
+## 🎯 Key Features
 
-In the project directory, you can run:
+- **Robust Frontend Architecture**: Built with React, TypeScript, and Redux Toolkit
+- **Modern UI**: Responsive design using RadixUI + Tailwind CSS with dark/light themes
+- **Internationalization**: Multi-language support with i18n
+- **Comprehensive Testing**:
+  - E2E Testing with Cypress and Playwright
+  - Unit Testing with Jest and React Testing Library
+  - API Mocking with MSW and Mirage.js
+- **CI/CD Pipeline**: Automated testing, building, and deployment
+- **Best Practices**: SOLID principles, TDD approach, Clean Architecture
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend
+- React
+- TypeScript
+- Redux Toolkit + RTK Query
+- Shadcn UI
+- Tailwind CSS
+- React Router
+- I18n for localization
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Backend
+- [NestJS](/backend/nestjs-server/README.md)
+- [Golang](/backend/gin-server/README.md)
 
-### `npm test`
+### Testing
+- Jest & React Testing Library
+- Cypress
+- Playwright
+- MSW (Mock Service Worker) + MSW Data
+- Mirage.js
+- Coverage reports with Istanbul + Mocha
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Development Tools
+- Storybook
+- ESLint & Prettier
+- Husky & lint-staged
+- Commitizen
+- TypeScript
+- Webpack
 
-### `npm run build`
+## 📚 Quick Start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Clone the repository
+git clone https://github.com/singhAmandeep007/ReMinder.git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Install dependencies - Requires Node.js v20.11.1
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Start development server
+npm start
 
-### `npm run eject`
+# Run tests
+npm test:unit
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 📖 Available Scripts
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `npm start` - Start development server
+- `npm run analyze` - Analyze bundle size
+- `npm run preview` - Run the production build locally - API calls will be proxied to Mock Server
+- `npm run lint` - Run formatting and linting
+- `npm run deploy` - Deploy the app to github pages along with docs
+- `npm run storybook:start` - Run Storybook locally
+- `npm run commit:init` - Initialize a commit process for staged files
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [Testing scripts](./testing.md)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🌟 Best Practices
 
-## Learn More
+- Test-Driven Development (TDD)
+- SOLID Principles
+- Component-Driven Development
+- Atomic Design Principles
+- Clean Code Architecture
+- Conventional Commits
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🤝 Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions are welcome!
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
