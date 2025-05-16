@@ -1,12 +1,13 @@
-go 1.22.1
+go 1.23.0
 
+toolchain go1.23.8
 
 use (
+	./pkg/auth
 	./pkg/config
 	./pkg/constants
 	./pkg/logger
+	./pkg/memcache
 	./pkg/usernamegen
-  ./pkg/auth
-  ./pkg/memcache
 	./server
 )

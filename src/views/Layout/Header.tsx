@@ -39,11 +39,7 @@ export const Header: FC<THeaderProps> = () => {
                 to={path}
               >
                 {({ isActive }) => {
-                  return (
-                    <span className={`text-lg ${isActive ? "border-b-2 border-primary text-primary" : ""}`}>
-                      {title}
-                    </span>
-                  );
+                  return <span className={`text-lg ${isActive ? "border-primary text-primary" : ""}`}>{title}</span>;
                 }}
               </RouteLink>
             ))}

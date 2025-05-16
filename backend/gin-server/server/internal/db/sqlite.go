@@ -15,6 +15,8 @@ import (
 	"github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/logger"
 
 	_ "github.com/mattn/go-sqlite3" // SQLite driver
+
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 // SQLiteDatabase implements the Database interface for SQLite
@@ -212,6 +214,26 @@ func (s *SQLiteDatabase) Migrate(ctx context.Context) error {
 	s.logger.Infof("SQLite migrations completed successfully")
 	return nil
 }
+
+// func (s *SQLiteDatabase) Migrate(ctx context.Context) error {
+// 	s.logger.Infof("Running SQLite migrations")
+// 	driver, err := sqlite3.WithInstance(s.conn, &sqlite3.Config{})
+// 	if err != nil {
+// 		return fmt.Errorf("migration driver error: %w", err)
+// 	}
+// 	m, err := migrate.NewWithDatabaseInstance(
+// 		"file:////Users/singhamandeep007/Developer/Projects/ReMinder/backend/gin-server/server/internal/db/migrations",
+// 		"sqlite3", driver)
+// 	if err != nil {
+// 		return fmt.Errorf("migration instance error: %w", err)
+// 	}
+// 	err = m.Up()
+// 	if err != nil && err != migrate.ErrNoChange {
+// 		return fmt.Errorf("migration failed: %w", err)
+// 	}
+// 	s.logger.Infof("SQLite migrations completed successfully")
+// 	return nil
+// }
 
 // Seed populates the database with initial data
 func (s *SQLiteDatabase) Seed(ctx context.Context) error {
