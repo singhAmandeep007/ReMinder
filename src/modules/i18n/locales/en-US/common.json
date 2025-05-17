@@ -18,7 +18,9 @@
   },
   "navbar": {
     "home": "Home",
-    "reminders": "Reminders"
+    "reminders": "Reminders",
+    "exploreDemo": "Explore Demo",
+    "github": "Github"
   },
   "notFound": "Not found - Page doesn't exist"
 }

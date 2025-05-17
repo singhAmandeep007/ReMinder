@@ -16,7 +16,7 @@ describe("Header", () => {
 
     expect(screen.getByTestId("header")).toBeInTheDocument();
 
-    ["Home", "Reminders"].forEach((link) => {
+    ["ReMinder", "Explore Demo", "Github"].forEach((link) => {
       expect(screen.getByRole("link", { name: `${link}` })).toBeInTheDocument();
     });
   });

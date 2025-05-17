@@ -1,10 +1,12 @@
 import { FC } from "react";
 
-import { Bell } from "lucide-react";
+import { Code2, Github } from "lucide-react";
 
 import { useTranslation } from "react-i18next";
 
-import { RouteLink } from "components";
+import { useLocation } from "react-router";
+
+import { RouteLink, Button } from "components";
 
 import { HOME_ROUTE_BY_PATH, ROUTE_BY_PATH } from "app/Router";
 
@@ -17,35 +19,44 @@ export type THeaderProps = Record<string, never>;
 export const Header: FC<THeaderProps> = () => {
   const { t } = useTranslation("common");
 
+  const location = useLocation();
+
+  const isReminderPath = location.pathname === HOME_ROUTE_BY_PATH.reminders;
+
   return (
     <header
-      className="h-[--navbar-height]"
+      className="sticky top-0 z-[--navbar-z-index] border-b border-border bg-background/80 p-4 shadow-lg backdrop-blur-md"
       data-testid="header"
     >
-      <div className="flex h-full w-full items-center justify-between border-b-2 border-primary px-4">
-        <div>
-          <RouteLink to={ROUTE_BY_PATH.home}>
-            <Bell className="icon inline-block fill-primary" />
-          </RouteLink>
-        </div>
-        <div>
-          <nav className="flex items-center justify-between gap-3">
-            {[
-              { title: t("navbar.home"), path: ROUTE_BY_PATH.home },
-              { title: t("navbar.reminders"), path: HOME_ROUTE_BY_PATH.reminders },
-            ].map(({ path, title }) => (
-              <RouteLink
-                key={path}
-                to={path}
-              >
-                {({ isActive }) => {
-                  return <span className={`text-lg ${isActive ? "border-primary text-primary" : ""}`}>{title}</span>;
-                }}
-              </RouteLink>
-            ))}
-          </nav>
-        </div>
-        <div className="inline-flex items-center gap-1">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <RouteLink
+          to={ROUTE_BY_PATH.home}
+          className="flex items-center text-xl font-bold"
+        >
+          <Code2 className="mr-2 h-8 w-8 text-primary" />
+          {t("app.appName")}
+        </RouteLink>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {!isReminderPath && (
+            <Button asChild>
+              <RouteLink to={HOME_ROUTE_BY_PATH.reminders}> {t("navbar.exploreDemo")}</RouteLink>
+            </Button>
+          )}
+
+          <Button
+            asChild
+            variant="secondary"
+          >
+            <a
+              href="https://github.com/singhAmandeep007/ReMinder"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="mr-2 inline-block h-5 w-5" />
+              {t("navbar.github")}
+            </a>
+          </Button>
           <ThemeToggler />
           <LangToggler />
         </div>
