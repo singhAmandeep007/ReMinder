@@ -13,11 +13,11 @@ describe("Home Page", () => {
 
     homeElements.root.should("exist");
 
-    homeElements.root.findByRole("heading", { name: "A production grade reminder app" }).should("exist");
+    homeElements.root.findByRole("heading", { name: "Full-Stack Reminder Application" }).should("exist");
 
-    homeElements.root.findByRole("heading", { name: "Tech Stack", level: 2 }).should("exist");
+    homeElements.root.findByRole("link", { name: "Explore Demo" }).should("exist");
 
-    homeElements.root.findByRole("heading", { name: "Folder Structure", level: 2 }).should("exist");
+    homeElements.root.findByRole("link", { name: "Check Build Process" }).should("exist");
 
     homeElements.footer.contains(`Copyright © ${new Date().getFullYear()}Amandeep Singh`).should("exist");
 
@@ -26,7 +26,7 @@ describe("Home Page", () => {
       .should("have.attr", "href")
       .and("include", "https://github.com/singhAmandeep007");
 
-    homeElements.header.findByRole("link", { name: "Reminders" }).click();
+    homeElements.root.findByRole("link", { name: "Explore Demo" }).click();
 
     remindersElements.root.should("exist");
 
@@ -53,7 +53,5 @@ describe("Home Page", () => {
     homeElements.langTogglerMenu.findByRole("menuitem", { name: "Japanese" }).click();
 
     cy.document().its("documentElement").should("have.attr", "lang", "ja-JP");
-
-    homeElements.root.findByRole("heading", { name: "プロダクショングレードのリマインダーアプリ" }).should("exist");
   });
 });

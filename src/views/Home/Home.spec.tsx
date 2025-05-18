@@ -8,8 +8,8 @@ describe("Home", () => {
   it("should render correctly", () => {
     render(<Home />);
 
-    expect(screen.getByText("A production grade reminder app")).toBeInTheDocument();
-    expect(screen.getByText("Tech Stack")).toBeInTheDocument();
-    expect(screen.getByText("Folder Structure")).toBeInTheDocument();
+    expect(screen.getByText("Full-Stack Reminder Application")).toBeInTheDocument();
+    expect(screen.getByText("Explore Demo")).toBeInTheDocument();
+    expect(screen.getByText("Check Build Process")).toBeInTheDocument();
   });
 });

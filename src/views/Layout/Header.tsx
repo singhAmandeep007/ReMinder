@@ -25,7 +25,7 @@ export const Header: FC<THeaderProps> = () => {
 
   return (
     <header
-      className="sticky top-0 z-[--navbar-z-index] border-b border-border bg-background/80 p-4 shadow-lg backdrop-blur-md"
+      className="sticky top-0 z-[--navbar-z-index] min-h-[--navbar-min-height] border-b-2 border-primary bg-background/80 p-4 shadow-lg backdrop-blur-sm"
       data-testid="header"
     >
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 sm:flex-row">

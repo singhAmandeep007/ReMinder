@@ -15,3 +15,4 @@ export * from "./Progress";
 export * from "./Separator";
 export * from "./ValueSetter";
 export * from "./Select";
+export * from "./Card";

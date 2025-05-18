@@ -15,11 +15,11 @@ test.describe("Home Page", () => {
 
     await homeElements.goto();
 
-    await expect(homeElements.root.getByRole("heading", { name: "A production grade reminder app" })).toBeVisible();
+    await expect(homeElements.root.getByRole("heading", { name: "Full-Stack Reminder Application" })).toBeVisible();
 
-    await expect(homeElements.root.getByRole("heading", { name: "Tech Stack", level: 2 })).toBeVisible();
+    await expect(homeElements.root.getByRole("link", { name: "Explore Demo" })).toBeVisible();
 
-    await expect(homeElements.root.getByRole("heading", { name: "Folder Structure", level: 2 })).toBeVisible();
+    await expect(homeElements.root.getByRole("link", { name: "Check Build Process" })).toBeVisible();
 
     await expect(homeElements.footer).toContainText(`Copyright © ${new Date().getFullYear()}Amandeep Singh`);
 
@@ -28,7 +28,7 @@ test.describe("Home Page", () => {
       "https://github.com/singhAmandeep007"
     );
 
-    await homeElements.header.getByRole("link", { name: "Reminders" }).click();
+    await homeElements.header.getByRole("link", { name: "Explore Demo" }).click();
 
     await expect(homeElements.root).toBeHidden();
   });
