@@ -13,7 +13,7 @@ export const Footer: FC<TFooterProps> = () => {
       className="h-min-[--footer-min-height]"
       data-testid="footer"
     >
-      <div className="flex h-full w-full flex-col items-center justify-center gap-2 border-t-2 border-primary p-2">
+      <div className="flex h-full w-full items-center justify-center gap-2 border-t-2 border-primary p-2">
         <Typography variant={"p"}>
           {t("app.copyright", {
             year: new Date().getFullYear(),
@@ -27,6 +27,8 @@ export const Footer: FC<TFooterProps> = () => {
             {t("app.author")}
           </a>
         </Typography>
+
+        <span>&bull;</span>
 
         <nav className="flex flex-wrap items-center justify-center gap-4">
           <a

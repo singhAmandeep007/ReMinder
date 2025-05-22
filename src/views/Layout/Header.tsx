@@ -30,7 +30,7 @@ export const Header: FC<THeaderProps> = () => {
       className={`${cn(isHomePath ? "sticky" : "")} top-0 z-[--navbar-z-index] border-b-2 border-primary bg-background/80 p-4 shadow-lg backdrop-blur-sm`}
       data-testid="header"
     >
-      <div className="md:conainer container mx-auto flex flex-row items-center justify-between gap-4">
+      <div className="mx-auto flex flex-row items-center justify-between gap-4">
         <RouteLink
           to={ROUTE_BY_PATH.home}
           className="flex items-center text-xl font-bold"
@@ -59,7 +59,7 @@ export const Header: FC<THeaderProps> = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="ml-2 inline-block h-5 w-5" />
+              <Github className="mr-2 inline-block h-5 w-5" />
               {t("navbar.github")}
             </a>
           </Button>
