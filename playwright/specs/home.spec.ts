@@ -25,7 +25,7 @@ test.describe("Home Page", () => {
 
     await expect(homeElements.footer.getByRole("link", { name: "Amandeep Singh" })).toHaveAttribute(
       "href",
-      "https://github.com/singhAmandeep007"
+      "https://singhamandeep007.github.io"
     );
 
     await homeElements.header.getByRole("link", { name: "Explore Demo" }).click();

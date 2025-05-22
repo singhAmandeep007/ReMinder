@@ -24,7 +24,7 @@ describe("Home Page", () => {
     homeElements.footer
       .findByRole("link", { name: "Amandeep Singh" })
       .should("have.attr", "href")
-      .and("include", "https://github.com/singhAmandeep007");
+      .and("include", "https://singhamandeep007.github.io");
 
     homeElements.root.findByRole("link", { name: "Explore Demo" }).click();
 

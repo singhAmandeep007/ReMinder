@@ -21,7 +21,7 @@ export const Footer: FC<TFooterProps> = () => {
           <a
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/singhAmandeep007"
+            href="https://singhamandeep007.github.io"
             className="ml-1 border-primary text-primary hover:border-b-2"
           >
             {t("app.author")}
