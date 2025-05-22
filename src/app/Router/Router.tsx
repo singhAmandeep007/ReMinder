@@ -8,7 +8,7 @@ import { NotFound } from "views/NotFound";
 
 import { BaseLayout } from "views/Layout";
 
-import { Home } from "views/Home";
+import { Home } from "views/Home/index";
 
 import { HOME_ROUTE_BY_PATH, ROUTE_BY_PATH, BASENAME } from "./consts";
 
