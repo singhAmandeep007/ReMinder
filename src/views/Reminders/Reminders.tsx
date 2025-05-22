@@ -18,10 +18,10 @@ export const Reminders: FC<TRemindersProps> = () => {
 
   return (
     <div
-      className="mx-auto h-full max-w-screen-lg p-2 md:p-8"
+      className="mx-auto h-[--content-height] max-w-screen-lg p-2 md:p-8"
       data-testid="reminders"
     >
-      <div className="flex h-full max-h-[600px] flex-col rounded border-2 border-primary shadow-lg lg:h-3/4">
+      <div className="flex h-full max-h-[900px] flex-col rounded border-2 border-primary shadow-lg">
         <PanelGroup
           direction={isBelowMd ? "vertical" : "horizontal"}
           className="flex-1"

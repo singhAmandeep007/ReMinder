@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 
 import { useLocation } from "react-router";
 
+import { cn } from "utils";
+
 import { RouteLink, Button } from "components";
 
 import { HOME_ROUTE_BY_PATH, ROUTE_BY_PATH } from "app/Router";
@@ -13,7 +15,6 @@ import { HOME_ROUTE_BY_PATH, ROUTE_BY_PATH } from "app/Router";
 import { ThemeToggler } from "modules/theme";
 
 import { LangToggler } from "modules/i18n";
-import { cn } from "utils";
 
 export type THeaderProps = Record<string, never>;
 
@@ -26,10 +27,10 @@ export const Header: FC<THeaderProps> = () => {
 
   return (
     <header
-      className={`${cn(isHomePath ? "sticky" : "")} backdrop-blur-sm" data-testid="header top-0 z-[--navbar-z-index] min-h-[--navbar-min-height] border-b-2 border-primary bg-background/80 p-4 shadow-lg`}
+      className={`${cn(isHomePath ? "sticky" : "")} top-0 z-[--navbar-z-index] border-b-2 border-primary bg-background/80 p-4 shadow-lg backdrop-blur-sm`}
       data-testid="header"
     >
-      <div className="container mx-auto flex flex-row items-center justify-between gap-4">
+      <div className="md:conainer container mx-auto flex flex-row items-center justify-between gap-4">
         <RouteLink
           to={ROUTE_BY_PATH.home}
           className="flex items-center text-xl font-bold"
@@ -58,8 +59,8 @@ export const Header: FC<THeaderProps> = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t("navbar.github")}
               <Github className="ml-2 inline-block h-5 w-5" />
+              {t("navbar.github")}
             </a>
           </Button>
           <div className="flex items-center gap-2">
