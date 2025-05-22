@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import { useTranslation } from "react-i18next";
-import { Heart } from "lucide-react";
 
 import { Typography } from "components";
 
@@ -29,7 +28,7 @@ export const Footer: FC<TFooterProps> = () => {
           </a>
         </Typography>
 
-        <nav className="mb-4 flex flex-wrap items-center justify-center gap-4">
+        <nav className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="https://github.com/singhAmandeep007/ReMinder"
             target="_blank"
@@ -48,13 +47,6 @@ export const Footer: FC<TFooterProps> = () => {
             LinkedIn
           </a>
         </nav>
-        <p className="flex items-center justify-center">
-          Built with modern web technologies
-          <Heart
-            size={16}
-            className="ml-1.5 text-primary"
-          />
-        </p>
       </div>
     </footer>
   );

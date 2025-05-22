@@ -13,7 +13,7 @@ export const BaseLayout: FC<TBaseLayoutProps> = () => {
       <Header />
 
       <main
-        className="h-[--content-height] overflow-x-auto"
+        className="min-h-[--content-height] overflow-x-auto"
         data-testid="content"
       >
         <Outlet />

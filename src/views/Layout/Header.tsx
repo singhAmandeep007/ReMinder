@@ -13,6 +13,7 @@ import { HOME_ROUTE_BY_PATH, ROUTE_BY_PATH } from "app/Router";
 import { ThemeToggler } from "modules/theme";
 
 import { LangToggler } from "modules/i18n";
+import { cn } from "utils";
 
 export type THeaderProps = Record<string, never>;
 
@@ -21,14 +22,14 @@ export const Header: FC<THeaderProps> = () => {
 
   const location = useLocation();
 
-  const isReminderPath = location.pathname === HOME_ROUTE_BY_PATH.reminders;
+  const isHomePath = location.pathname === ROUTE_BY_PATH.home;
 
   return (
     <header
-      className="sticky top-0 z-[--navbar-z-index] min-h-[--navbar-min-height] border-b-2 border-primary bg-background/80 p-4 shadow-lg backdrop-blur-sm"
+      className={`${cn(isHomePath ? "sticky" : "")} backdrop-blur-sm" data-testid="header top-0 z-[--navbar-z-index] min-h-[--navbar-min-height] border-b-2 border-primary bg-background/80 p-4 shadow-lg`}
       data-testid="header"
     >
-      <div className="container mx-auto flex flex-col items-center justify-between gap-4 sm:flex-row">
+      <div className="container mx-auto flex flex-row items-center justify-between gap-4">
         <RouteLink
           to={ROUTE_BY_PATH.home}
           className="flex items-center text-xl font-bold"
@@ -38,8 +39,11 @@ export const Header: FC<THeaderProps> = () => {
         </RouteLink>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          {!isReminderPath && (
-            <Button asChild>
+          {isHomePath && (
+            <Button
+              asChild
+              className="hidden md:inline-flex"
+            >
               <RouteLink to={HOME_ROUTE_BY_PATH.reminders}> {t("navbar.exploreDemo")}</RouteLink>
             </Button>
           )}
@@ -47,18 +51,21 @@ export const Header: FC<THeaderProps> = () => {
           <Button
             asChild
             variant="secondary"
+            className="hidden md:inline-flex"
           >
             <a
               href="https://github.com/singhAmandeep007/ReMinder"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="mr-2 inline-block h-5 w-5" />
               {t("navbar.github")}
+              <Github className="ml-2 inline-block h-5 w-5" />
             </a>
           </Button>
-          <ThemeToggler />
-          <LangToggler />
+          <div className="flex items-center gap-2">
+            <ThemeToggler />
+            <LangToggler />
+          </div>
         </div>
       </div>
     </header>
