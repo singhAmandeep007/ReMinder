@@ -1,3 +1,6 @@
 gin-server.db
 .env
 gin-server.log
+
+# service account
+flowing-castle-447017-h0-72697064ea74.json

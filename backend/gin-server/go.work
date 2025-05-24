@@ -1,9 +1,8 @@
-go 1.23.0
-
-toolchain go1.23.8
+go 1.23.8
 
 use (
 	./pkg/auth
+	./pkg/bq
 	./pkg/config
 	./pkg/constants
 	./pkg/logger

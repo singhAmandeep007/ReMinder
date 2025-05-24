@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
+	"github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/bq"
 	"github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/config"
 	"github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/logger"
 	"github.com/singhAmandeep007/ReMinder/backend/gin-server/server/internal/app"
@@ -26,6 +28,22 @@ func main() {
 		logger.WithMinLevel(logger.DebugLevel),
 	)
 	defer log.Close()
+
+	// Initialize BigQuery client
+	ctx := context.Background()
+
+	bqConfig := bq.Config{
+		ProjectID:           "flowing-castle-447017-h0",
+		CredentialsPath:     utils.ResolvePathFromProjectRoot("flowing-castle-447017-h0-72697064ea74.json"),
+		Location:            "US",
+		QueryTimeoutSeconds: 300,
+	}
+
+	bqClient, err := bq.NewClient(ctx, bqConfig)
+	if err != nil {
+		log.Infof("Failed to create BigQuery client: %v", err)
+	}
+	defer bqClient.Close()
 
 	// Initialize application
 	application, err := app.New(cfg, log)
