@@ -1,2 +1,4 @@
 github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
 github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
+github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/constants v0.0.0-20250522190106-0d8c62ee241b h1:aoUdemh3E61ZqT7NZTTQTKQKMz71mu6Zp1oMiaVVCfA=
+github.com/singhAmandeep007/ReMinder/backend/gin-server/pkg/constants v0.0.0-20250522190106-0d8c62ee241b/go.mod h1:ad24qtvFfPVSjp0TxFG2WP1DvkfyF7x52+QwU54OXmc=

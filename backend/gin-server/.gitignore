@@ -1,6 +1,16 @@
+# sqlite db
 gin-server.db
+
+# dotenv environment variables file
 .env
+.env.dev
+.env.prod
+
+# logs
 gin-server.log
+
+# build
+bin
 
 # service account
 flowing-castle-447017-h0-72697064ea74.json

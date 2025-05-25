@@ -1,29 +1,43 @@
 package utils
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 )
 
 func ResolvePathFromProjectRoot(envFile string) string {
+	// First try to find go.mod (development mode)
+	if projectRoot := findProjectRoot(); projectRoot != "" {
+		return filepath.Join(projectRoot, envFile)
+	}
+
+	// Fallback to executable directory (production mode)
+	execPath, err := os.Executable()
+	if err != nil {
+		// Last resort: current working directory
+		return envFile
+	}
+
+	execDir := filepath.Dir(execPath)
+	return filepath.Join(execDir, envFile)
+}
+
+func findProjectRoot() string {
 	currentDir, err := os.Getwd()
 	if err != nil {
-		panic(err)
+		return ""
 	}
 
 	for {
 		goModPath := filepath.Join(currentDir, "go.mod")
 		if _, err := os.Stat(goModPath); err == nil {
-			break
+			return currentDir
 		}
 
 		parent := filepath.Dir(currentDir)
 		if parent == currentDir {
-			panic(fmt.Errorf("go.mod not found"))
+			return "" // Not found
 		}
 		currentDir = parent
 	}
-
-	return filepath.Join(currentDir, envFile)
 }

@@ -42,7 +42,7 @@ func Load(fileName string) (*Config, error) {
 
 	config := &Config{
 		AppEnv: getEnv("APP_ENV", constants.EnvDevelopment),
-		Port:   getEnvAsInt("PORT", 8080),
+		Port:   getEnvAsInt("PORT", 8082),
 		DBType: getEnv("DB_TYPE", constants.SQLite),
 
 		SQLiteFile: getEnv("SQLITE_FILE", "./gin-server.db"),
