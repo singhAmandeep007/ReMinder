@@ -2,7 +2,7 @@ import { factory, nullable, oneOf, primaryKey, drop } from "@mswjs/data";
 import { NullableProperty } from "@mswjs/data/lib/nullable";
 
 import { uuid } from "utils";
-import { REMINDER_STATE } from "types";
+import { ReminderState } from "types";
 
 export const db = factory({
   reminder: {
@@ -12,7 +12,7 @@ export const db = factory({
     },
 
     isPinned: () => false,
-    state: () => REMINDER_STATE.INACTIVE,
+    state: () => ReminderState.INACTIVE,
     group: nullable(oneOf("reminderGroup")),
     createdAt: () => new Date().toISOString(),
     updatedAt: () => new Date().toISOString(),

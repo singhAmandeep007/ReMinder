@@ -1,4 +1,4 @@
-import { REMINDER_STATE, TReminder } from "types";
+import { ReminderState, TReminder } from "types";
 
 import { urlPrefix } from "utils";
 
@@ -51,7 +51,7 @@ export function reminderRoutes(this: TAppMockServer) {
 
     const defaultAttr: Partial<TReminder> = {
       isPinned: false,
-      state: REMINDER_STATE.INACTIVE,
+      state: ReminderState.INACTIVE,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       dueDate: null,

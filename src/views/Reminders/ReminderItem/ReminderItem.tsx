@@ -2,7 +2,7 @@ import { FC, useRef, useState } from "react";
 
 import { ChevronDown, ChevronUp, Pencil, Trash, Pin, CalendarClock, Timer } from "lucide-react";
 
-import { TReminder, REMINDER_STATE } from "types";
+import { TReminder, ReminderState } from "types";
 
 import {
   Button,
@@ -65,7 +65,7 @@ export const ReminderItem: FC<TReminderItemProps> = ({ reminder, listName }) => 
 
   const isMenuDisabled = isLoading;
 
-  const isCompleted = reminder.state === REMINDER_STATE.COMPLETED;
+  const isCompleted = reminder.state === ReminderState.COMPLETED;
 
   return (
     <div
@@ -98,7 +98,7 @@ export const ReminderItem: FC<TReminderItemProps> = ({ reminder, listName }) => 
               onClick={() =>
                 handleOnUpdate({
                   id: reminder.id,
-                  state: isCompleted ? REMINDER_STATE.INACTIVE : REMINDER_STATE.COMPLETED,
+                  state: isCompleted ? ReminderState.INACTIVE : ReminderState.COMPLETED,
                 })
               }
               data-testid={`reminder-item-checkbox`}

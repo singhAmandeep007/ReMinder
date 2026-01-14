@@ -142,5 +142,6 @@ module.exports = {
     "/jest.config.js",
     "/prettier.config.js",
     "/docs",
+    "/src/generated/",
   ],
 };

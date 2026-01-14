@@ -1,0 +1,548 @@
+openapi: 3.0.3
+info:
+  title: ReMinder API
+  description: |
+    REST API for the ReMinder application - a production-grade reminder management system.
+    This specification serves as the single source of truth for API contracts between frontend and backend.
+  version: 1.0.0
+  contact:
+    name: Amandeep Singh
+    email: amandeep.singh.fsd@gmail.com
+  license:
+    name: MIT
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+  - url: https://api.reminder.example.com/v1
+    description: Production server
+
+tags:
+  - name: Reminders
+    description: Operations for managing reminders
+  - name: Reminder Groups
+    description: Operations for managing reminder groups
+
+paths:
+  /reminders:
+    get:
+      tags:
+        - Reminders
+      summary: List reminders
+      description: Retrieve a list of reminders with optional filtering by group and state
+      operationId: getReminders
+      parameters:
+        - name: groupId
+          in: query
+          description: Filter by reminder group ID
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - name: state
+          in: query
+          description: Filter by reminder state
+          required: false
+          schema:
+            $ref: "#/components/schemas/ReminderState"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemindersResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      tags:
+        - Reminders
+      summary: Create a reminder
+      description: Create a new reminder
+      operationId: createReminder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReminderRequest"
+      responses:
+        "201":
+          description: Reminder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderResponse"
+        "400":
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Reminder group not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /reminders/{id}:
+    patch:
+      tags:
+        - Reminders
+      summary: Update a reminder
+      description: Update an existing reminder by ID
+      operationId: updateReminder
+      parameters:
+        - name: id
+          in: path
+          description: Reminder ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReminderRequest"
+      responses:
+        "200":
+          description: Reminder updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderResponse"
+        "404":
+          description: Reminder not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags:
+        - Reminders
+      summary: Delete a reminder
+      description: Delete an existing reminder by ID
+      operationId: deleteReminder
+      parameters:
+        - name: id
+          in: path
+          description: Reminder ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Reminder deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "404":
+          description: Reminder not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /reminder-groups:
+    get:
+      tags:
+        - Reminder Groups
+      summary: List reminder groups
+      description: Retrieve all reminder groups
+      operationId: getReminderGroups
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderGroupsResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      tags:
+        - Reminder Groups
+      summary: Create a reminder group
+      description: Create a new reminder group
+      operationId: createReminderGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReminderGroupRequest"
+      responses:
+        "201":
+          description: Reminder group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderGroupResponse"
+        "400":
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /reminder-groups/{id}:
+    get:
+      tags:
+        - Reminder Groups
+      summary: Get a reminder group
+      description: Retrieve a single reminder group by ID
+      operationId: getReminderGroup
+      parameters:
+        - name: id
+          in: path
+          description: Reminder group ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderGroupResponse"
+        "404":
+          description: Reminder group not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    patch:
+      tags:
+        - Reminder Groups
+      summary: Update a reminder group
+      description: Update an existing reminder group by ID
+      operationId: updateReminderGroup
+      parameters:
+        - name: id
+          in: path
+          description: Reminder group ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReminderGroupRequest"
+      responses:
+        "200":
+          description: Reminder group updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderGroupResponse"
+        "404":
+          description: Reminder group not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags:
+        - Reminder Groups
+      summary: Delete a reminder group
+      description: Delete an existing reminder group by ID. This also deletes all reminders in the group.
+      operationId: deleteReminderGroup
+      parameters:
+        - name: id
+          in: path
+          description: Reminder group ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Reminder group deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "404":
+          description: Reminder group not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    # Enums
+    ReminderState:
+      type: string
+      enum:
+        - INACTIVE
+        - INPROGRESS
+        - COMPLETED
+        - ARCHIVED
+      description: Current state of a reminder
+
+    # Core Models
+    ReminderFocusSession:
+      type: object
+      description: A focus session for a reminder
+      required:
+        - startTime
+        - endTime
+      properties:
+        startTime:
+          type: string
+          format: date-time
+          description: Start time of the focus session (ISO 8601 format)
+          example: "2024-01-15T09:00:00.000Z"
+        endTime:
+          type: string
+          format: date-time
+          description: End time of the focus session (ISO 8601 format)
+          example: "2024-01-15T10:30:00.000Z"
+
+    ReminderGroup:
+      type: object
+      description: A group/category for organizing reminders
+      required:
+        - id
+        - name
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the reminder group
+        name:
+          type: string
+          description: Name of the reminder group
+          example: "Work Tasks"
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp (ISO 8601 format)
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp (ISO 8601 format)
+
+    Reminder:
+      type: object
+      description: A reminder/task item
+      required:
+        - id
+        - title
+        - state
+        - isPinned
+        - createdAt
+        - updatedAt
+        - focusSessions
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the reminder
+        title:
+          type: string
+          description: Title of the reminder
+          example: "Complete project documentation"
+        state:
+          $ref: "#/components/schemas/ReminderState"
+        isPinned:
+          type: boolean
+          description: Whether the reminder is pinned to top
+          default: false
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp (ISO 8601 format)
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp (ISO 8601 format)
+        group:
+          allOf:
+            - $ref: "#/components/schemas/ReminderGroup"
+          nullable: true
+          description: Optional reminder group this reminder belongs to
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Due date and time for the reminder (ISO 8601 format)
+          example: "2024-01-20T17:00:00.000Z"
+        repeatTimes:
+          type: integer
+          nullable: true
+          description: Number of times to repeat the reminder
+          default: 1
+          minimum: 1
+        repeatInterval:
+          type: integer
+          nullable: true
+          description: Interval to repeat the reminder (in milliseconds)
+          default: 300000
+          minimum: 0
+        currentFocusSession:
+          allOf:
+            - $ref: "#/components/schemas/ReminderFocusSession"
+          nullable: true
+          description: Current active focus session for this reminder
+        focusSessions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReminderFocusSession"
+          description: History of focus sessions for this reminder
+
+    # Request Bodies
+    CreateReminderRequest:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the reminder
+          minLength: 1
+        groupId:
+          type: string
+          format: uuid
+          description: Optional ID of the reminder group to add this reminder to
+
+    UpdateReminderRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Updated title
+          minLength: 1
+        state:
+          $ref: "#/components/schemas/ReminderState"
+        isPinned:
+          type: boolean
+          description: Whether the reminder is pinned
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Due date and time
+        repeatTimes:
+          type: integer
+          nullable: true
+          description: Number of times to repeat
+          minimum: 1
+        repeatInterval:
+          type: integer
+          nullable: true
+          description: Repeat interval in milliseconds
+          minimum: 0
+        currentFocusSession:
+          allOf:
+            - $ref: "#/components/schemas/ReminderFocusSession"
+          nullable: true
+        focusSessions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReminderFocusSession"
+        groupId:
+          type: string
+          format: uuid
+          description: ID of the reminder group to move this reminder to
+
+    CreateReminderGroupRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the reminder group
+          minLength: 1
+
+    UpdateReminderGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+          minLength: 1
+
+    # Response Wrappers
+    ReminderResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: "#/components/schemas/Reminder"
+
+    RemindersResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Reminder"
+
+    ReminderGroupResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: "#/components/schemas/ReminderGroup"
+
+    ReminderGroupsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReminderGroup"
+
+    MessageResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Success or informational message
+          example: "Reminder deleted successfully"
+
+    ErrorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Error message describing what went wrong
+          example: "Reminder with id abc123 not found!"

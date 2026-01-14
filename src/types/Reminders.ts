@@ -1,161 +1,78 @@
-export const REMINDER_STATE = {
-  INACTIVE: "INACTIVE",
-  INPROGRESS: "INPROGRESS",
-  COMPLETED: "COMPLETED",
-  ARCHIVED: "ARCHIVED",
-} as const;
+import type {
+  Reminder,
+  ReminderGroup,
+  ReminderFocusSession,
+  ReminderState as ReminderStateEnum,
+  CreateReminderRequest,
+  UpdateReminderRequest,
+  CreateReminderGroupRequest,
+  UpdateReminderGroupRequest,
+  ReminderResponse,
+  RemindersResponse,
+  ReminderGroupResponse,
+  ReminderGroupsResponse,
+  MessageResponse,
+  ErrorResponse,
+} from "../generated/api";
 
-export type TReminderState = (typeof REMINDER_STATE)[keyof typeof REMINDER_STATE];
+// Re-export ReminderState enum (value export)
+export { ReminderState } from "../generated/api";
 
-export type TReminderFocusSession = {
-  startTime: string;
-  endTime: string;
-};
+// Re-export types (type-only exports for isolatedModules compatibility)
+export type {
+  // Core Models
+  Reminder,
+  ReminderGroup,
+  ReminderFocusSession,
+  // Request types
+  CreateReminderRequest,
+  UpdateReminderRequest,
+  CreateReminderGroupRequest,
+  UpdateReminderGroupRequest,
+  // Response types
+  ReminderResponse,
+  RemindersResponse,
+  ReminderGroupResponse,
+  ReminderGroupsResponse,
+  MessageResponse,
+  ErrorResponse,
+} from "../generated/api";
 
-export type TReminder = {
-  id: string;
-  title: string;
-  /**
-   * Current state of the reminder.
-   *
-   * @example "IN_ACTIVE" | "IN_PROGRESS" | "COMPLETED"
-   */
-  state: TReminderState;
-  /**
-   * Indicates if the reminder is pinned on top.
-   */
-  isPinned: boolean;
-  /**
-   * Date and time the reminder was created. (ISO 8601 format)
-   */
-  createdAt: string;
-  /**
-   * Date and time the reminder was last updated. (ISO 8601 format)
-   */
-  updatedAt: string;
-  /**
-   * Optional reminder group this reminder belongs to.
-   */
-  group: TReminderGroup | null;
-  /**
-   * Due date and time for the reminder. (ISO 8601 format)
-   *
-   * @example "2021-09-30T00:00:00.000Z"
-   */
-  dueDate: string | null;
-  /**
-   * Number of times to repeat the reminder.
-   *
-   * @default 1
-   */
-  repeatTimes: number | null;
-  /**
-   * Interval to repeat the reminder. (in milliseconds)
-   *
-   * @default 300000 (5 minutes)
-   */
-  repeatInterval: number | null;
+// Legacy type aliases
+export type TReminderState = ReminderStateEnum;
+export type TReminderFocusSession = ReminderFocusSession;
+export type TReminder = Reminder;
+export type TReminderGroup = ReminderGroup;
 
-  /**
-   * Current focus session for this reminder.
-   */
-  currentFocusSession: {
-    /**
-     * date and time when focus session was started for this reminder. (ISO 8601 format)
-     */
-    startTime: string;
-    /**
-     * date and time the focus session stopped for this reminder. (ISO 8601 format)
-     */
-    endTime: string;
-  } | null;
-  /**
-   * Array to store history of multiple focus sessions for this reminder.
-   * Each session includes start time and end time.
-   */
-  focusSessions: TReminderFocusSession[];
-};
+// Generic response wrappers (kept for backward compatibility)
+export type TMessageResponsePayload = MessageResponse;
+export type TDataResponsePayload<T> = { data: T };
 
-export type TReminderGroup = {
-  id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
+// Error
+export type THTTPError = ErrorResponse;
 
-export type TMessageResponsePayload = {
-  message: string;
-};
-
-export type TDataResponsePayload<T> = {
-  data: T;
-};
-
-/**
- * Error
- */
-export type THTTPError = {
-  message: string;
-};
-
-/**
- * Reminder
- */
+// Reminder request/response types
 export type TGetRemindersRequestQueryParams = Partial<{
   groupId: TReminderGroup["id"];
   state: TReminder["state"];
 }>;
-
-export type TGetRemindersResponsePayload = TDataResponsePayload<TReminder[]>;
-
+export type TGetRemindersResponsePayload = RemindersResponse;
 export type TGetReminderRequestPathParams = TReminder["id"];
-
-export type TGetReminderResponsePayload = TDataResponsePayload<TReminder>;
-
-export type TCreateReminderRequestPayload = Pick<TReminder, "title"> & Partial<{ groupId: TReminderGroup["id"] }>;
-
-export type TCreateReminderResponsePayload = TDataResponsePayload<TReminder>;
-
-export type TUpdateReminderRequestPayload = Pick<TReminder, "id"> &
-  Partial<
-    Pick<
-      TReminder,
-      | "title"
-      | "state"
-      | "isPinned"
-      | "dueDate"
-      | "currentFocusSession"
-      | "focusSessions"
-      | "repeatTimes"
-      | "repeatInterval"
-    > & {
-      groupId: TReminderGroup["id"];
-    }
-  >;
-
-export type TUpdateReminderResponsePayload = TDataResponsePayload<TReminder>;
-
+export type TGetReminderResponsePayload = ReminderResponse;
+export type TCreateReminderRequestPayload = CreateReminderRequest;
+export type TCreateReminderResponsePayload = ReminderResponse;
+export type TUpdateReminderRequestPayload = UpdateReminderRequest & { id: string };
+export type TUpdateReminderResponsePayload = ReminderResponse;
 export type TDeleteReminderRequestPathParams = TReminder["id"];
+export type TDeleteReminderResponsePayload = MessageResponse;
 
-export type TDeleteReminderResponsePayload = TMessageResponsePayload;
-
-/**
- * Reminder Group
- */
-export type TGetReminderGroupsResponsePayload = TDataResponsePayload<TReminderGroup[]>;
-
+// Reminder Group request/response types
+export type TGetReminderGroupsResponsePayload = ReminderGroupsResponse;
 export type TGetReminderGroupRequestPathParams = TReminderGroup["id"];
-
-export type TGetReminderGroupResponsePayload = TDataResponsePayload<TReminderGroup>;
-
-export type TCreateReminderGroupRequestPayload = Pick<TReminderGroup, "name">;
-
-export type TCreateReminderGroupResponsePayload = TDataResponsePayload<TReminderGroup>;
-
-export type TUpdateReminderGroupRequestPayload = Pick<TReminderGroup, "id"> & Partial<Pick<TReminderGroup, "name">>;
-
-export type TUpdateReminderGroupResponsePayload = TDataResponsePayload<TReminderGroup>;
-
+export type TGetReminderGroupResponsePayload = ReminderGroupResponse;
+export type TCreateReminderGroupRequestPayload = CreateReminderGroupRequest;
+export type TCreateReminderGroupResponsePayload = ReminderGroupResponse;
+export type TUpdateReminderGroupRequestPayload = UpdateReminderGroupRequest & { id: string };
+export type TUpdateReminderGroupResponsePayload = ReminderGroupResponse;
 export type TDeleteReminderGroupRequestPathParams = TReminderGroup["id"];
-
-export type TDeleteReminderGroupResponsePayload = TMessageResponsePayload;
+export type TDeleteReminderGroupResponsePayload = MessageResponse;

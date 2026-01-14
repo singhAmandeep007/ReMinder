@@ -45,6 +45,10 @@ A fully-featured reminder application showcasing modern web development practice
 - TypeScript
 - Webpack
 
+## OpenAPI Generator
+
+- [OpenAPI Generator Typescript Axios](https://openapi-generator.tech/docs/generators/typescript-axios)
+
 ## 📚 Quick Start
 
 ```bash

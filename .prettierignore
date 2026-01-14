@@ -3,3 +3,4 @@ config
 reports
 build
 scripts
+src/generated

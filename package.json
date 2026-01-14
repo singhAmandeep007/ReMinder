@@ -114,7 +114,11 @@
     "pw:test:delayed": "run-s wait \"pw:run -- {@}\" --",
     "pw:run": "playwright test",
     "pw:report": "playwright show-report",
-    "wait": "wait-on http://localhost:3000"
+    "wait": "wait-on http://localhost:3000",
+    "OPENAPI": "------------------------------------------------------------------------",
+    "api:validate": "openapi-generator-cli validate -i openapi/api.yaml",
+    "api:generate": "openapi-generator-cli generate",
+    "api:generate:clean": "rm -rf src/generated/api && npm run api:generate"
   },
   "browserslist": {
     "production": [
@@ -135,6 +139,7 @@
     "@chromatic-com/storybook": "^1.6.1",
     "@cypress/code-coverage": "^3.12.39",
     "@mswjs/data": "^0.16.1",
+    "@openapitools/openapi-generator-cli": "^2.27.0",
     "@playwright/test": "^1.50.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@storybook/addon-a11y": "^8.2.7",
