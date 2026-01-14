@@ -1,6 +1,10 @@
 package app
 
 import (
+	"net/http"
+	"os"
+	"path/filepath"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +21,36 @@ func NewRouter(container *Container) *gin.Engine {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
+
+	// OpenAPI spec endpoint
+	r.GET("/api/openapi.yaml", func(c *gin.Context) {
+		// Try to find the OpenAPI spec file
+		paths := []string{
+			"../../../openapi/api.yaml",    // From server dir
+			"../../openapi/api.yaml",       // From gin-server dir
+			"./openapi/api.yaml",           // From root
+			os.Getenv("OPENAPI_SPEC_PATH"), // Environment variable
+		}
+
+		for _, p := range paths {
+			if p == "" {
+				continue
+			}
+			absPath, err := filepath.Abs(p)
+			if err != nil {
+				continue
+			}
+			if _, err := os.Stat(absPath); err == nil {
+				c.File(absPath)
+				return
+			}
+		}
+
+		c.JSON(http.StatusNotFound, gin.H{"message": "OpenAPI spec not found"})
+	})
+
+	// Swagger UI static files (if swagger-ui-dist is available)
+	r.StaticFS("/swagger", http.Dir("./swagger-ui"))
 
 	api := r.Group("/api")
 	{

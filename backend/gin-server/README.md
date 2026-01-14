@@ -59,3 +59,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 4. Change to the project directory: `cd backend/gin-server`
 5. Install dependencies: `go mod tidy`
 6. Run the server: `go run cmd/server/main.go` or with hot reloading: `nodemon`
+7. Go to http://localhost:8080/swagger/ to view the API documentation
